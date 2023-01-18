@@ -4,7 +4,7 @@ import json
 import logging
 from flask import Flask
 DEBUG = False
-PORT_NUMBER = 5077
+PORT_NUMBER = 5078
 
 app = Flask(__name__)
 
@@ -61,7 +61,7 @@ def aboutus():
 
 @app.route('/logs', methods=['POST'])
 def logs():
-    url = "http://ec2-34-218-241-190.us-west-2.compute.amazonaws.com:50150/logs/vercel_drain"
+    url = ""
     try:
         response = requests.post(url) # if request is GET replace post with get
         data = response.text # response have multiple attributes can be converted to text or can do other processing if required
@@ -72,7 +72,7 @@ def logs():
 
 @app.route('/vercel/drain', methods=['GET', 'POST'])
 def versal_drain():
-    url = "http://ec2-34-218-241-190.us-west-2.compute.amazonaws.com:50150/logs/vercel_drain"
+    url = ""
     payload = {}
     try:
         response = requests.post(url, data = payload)
@@ -135,8 +135,8 @@ def versal_callback():
 
 def getToken(code):
     redirect_uri = '/vercel/drain'
-    client_id = 'oac_GlZWYfLVpQS0TWIGoLYDLx5I'
-    client_secret = 'Sj3qzukpSo6mo5ogmuaccc4r'
+    client_id = ''
+    client_secret = ''
     url = 'https://api.vercel.com/v2/oauth/access_token'
 
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -156,7 +156,7 @@ def getToken(code):
 
 def createLogDrain(token, body):
     url2 = 'https://api.vercel.com/v1/integrations/log-drains'
-    name = 'cloudvista-logdrain'
+    name = 'logdrain'
     method = 'post'
     header = {
         'Content-Type': 'application/json',
